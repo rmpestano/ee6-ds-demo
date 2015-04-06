@@ -1,14 +1,11 @@
 package org.os890.demo.ee6.test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 
 import org.apache.deltaspike.core.api.projectstage.ProjectStage;
-import org.apache.deltaspike.jpa.api.transaction.Transactional;
 import org.apache.deltaspike.testcontrol.api.TestControl;
 import org.apache.deltaspike.testcontrol.api.junit.CdiTestRunner;
 import org.junit.After;
@@ -34,12 +31,13 @@ public class UserRepositoryTest {
   public void tearUp(){
     User u = new User("testUser","first","last");
     userRepository.save(u);
-    assertFalse(u.isTransient());
+    assertNotNull(u.getId());
+    assertEquals(userRepository.count(), 1);
   }
 
   @After
   public void tearDown(){
-    em.remove(userRepository.findUser("testUser"));
+    userRepository.getEntityManager().remove(userRepository.findUser("testUser"));
   }
 
 

@@ -29,13 +29,13 @@ import org.apache.deltaspike.core.api.projectstage.ProjectStage;
 @Exclude(ifProjectStage = ProjectStage.UnitTest.class)
 public class EntityManagerProducer {
 
-   /* @PersistenceContext(unitName = "demoApplicationPU")
+    @PersistenceContext(unitName = "demoApplicationPU")
     private EntityManager entityManagerProxy;
 
     @Produces
     public EntityManager exposeDependentEntityManager() {
         return entityManagerProxy;
-    }*/
+    }
 
 
 }

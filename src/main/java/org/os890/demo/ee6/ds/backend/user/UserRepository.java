@@ -18,13 +18,14 @@
  */
 package org.os890.demo.ee6.ds.backend.user;
 
-import org.apache.deltaspike.jpa.api.transaction.Transactional;
-import org.os890.demo.ee6.ds.domain.user.User;
+import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import java.util.List;
+
+import org.apache.deltaspike.jpa.api.transaction.Transactional;
+import org.os890.demo.ee6.ds.domain.user.User;
 
 @ApplicationScoped
 public class UserRepository {
@@ -46,6 +47,7 @@ public class UserRepository {
         return null;
     }
 
+    @Transactional
     public User save(User user) {
         if (user.isTransient()) {
             entityManager.persist(user);
@@ -53,5 +55,13 @@ public class UserRepository {
             user = entityManager.merge(user);
         }
         return user;
+    }
+
+    public long count(){
+        return (Long)entityManager.createQuery("select count(*) from User u").getSingleResult();
+    }
+
+    public EntityManager getEntityManager() {
+        return entityManager;
     }
 }
