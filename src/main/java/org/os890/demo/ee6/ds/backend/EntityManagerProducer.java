@@ -22,14 +22,20 @@ import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.apache.deltaspike.core.api.exclude.Exclude;
+import org.apache.deltaspike.core.api.projectstage.ProjectStage;
+
 //optional: @ApplicationScoped
+@Exclude(ifProjectStage = ProjectStage.UnitTest.class)
 public class EntityManagerProducer {
 
-    @PersistenceContext(unitName = "demoApplicationPU")
+   /* @PersistenceContext(unitName = "demoApplicationPU")
     private EntityManager entityManagerProxy;
 
     @Produces
     public EntityManager exposeDependentEntityManager() {
         return entityManagerProxy;
-    }
+    }*/
+
+
 }

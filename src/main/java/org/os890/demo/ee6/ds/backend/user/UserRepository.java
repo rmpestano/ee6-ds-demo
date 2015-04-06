@@ -18,6 +18,7 @@
  */
 package org.os890.demo.ee6.ds.backend.user;
 
+import org.apache.deltaspike.jpa.api.transaction.Transactional;
 import org.os890.demo.ee6.ds.domain.user.User;
 
 import javax.enterprise.context.ApplicationScoped;
