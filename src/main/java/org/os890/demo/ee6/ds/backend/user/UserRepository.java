@@ -47,6 +47,11 @@ public class UserRepository {
         return null;
     }
 
+    @Transactional(readOnly = true)
+    public List<User> all(){
+        return entityManager.createQuery("select u from User u").getResultList();
+    }
+
     @Transactional
     public User save(User user) {
         if (user.isTransient()) {
@@ -61,7 +66,13 @@ public class UserRepository {
         return (Long)entityManager.createQuery("select count(*) from User u").getSingleResult();
     }
 
-    public EntityManager getEntityManager() {
-        return entityManager;
+
+    @Transactional
+    public void remove(User user) {
+        if(user == null || user.getId() == null){
+            throw new RuntimeException("provide a valid user to remove");
+        }
+
+        entityManager.remove(entityManager.find(User.class,user.getId()));
     }
 }

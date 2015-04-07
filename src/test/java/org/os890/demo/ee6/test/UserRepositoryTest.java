@@ -2,6 +2,7 @@ package org.os890.demo.ee6.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import javax.inject.Inject;
 
@@ -37,7 +38,9 @@ public class UserRepositoryTest {
 
   @After
   public void tearDown(){
-    userRepository.getEntityManager().remove(userRepository.findUser("testUser"));
+    for (User user : userRepository.all()) {
+      userRepository.remove(user);
+    }
   }
 
 
@@ -45,8 +48,28 @@ public class UserRepositoryTest {
   public void shouldFindUser() {
     User user = userRepository.findUser("testUser");
     assertNotNull(user);
-    assertEquals(user.getUserName(),"testUser");
+    assertEquals(user.getUserName(), "testUser");
   }
 
+  @Test
+  public void shouldRegisterUser(){
+    User u = new User("new user","first","last");
+    userRepository.save(u);
+    assertTrue(userRepository.isRegistered("new user"));
+  }
+
+  @Test
+  public void shouldFailToRemoveNonManagedUser(){
+    User u = new User();
+    String error = "";
+    try {
+      userRepository.remove(u);
+    }catch (RuntimeException e){
+      error = e.getMessage();
+    }
+
+    assertEquals(error,"provide a valid user to remove");
+
+  }
 
 }
