@@ -18,6 +18,8 @@
  */
 package org.os890.demo.ee6.test;
 
+import org.apache.deltaspike.core.api.projectstage.ProjectStage;
+import org.apache.deltaspike.testcontrol.api.TestControl;
 import org.os890.demo.ee6.ds.backend.user.UserRepository;
 import org.os890.demo.ee6.ds.domain.user.User;
 import org.os890.demo.ee6.ds.view.config.Pages;
@@ -34,6 +36,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 @RunWith(CdiTestRunner.class)
+//@TestControl(projectStage = ProjectStage.UnitTest.class) also work with TestEntityManager
 public class PageBeanTest
 {
     @Inject
