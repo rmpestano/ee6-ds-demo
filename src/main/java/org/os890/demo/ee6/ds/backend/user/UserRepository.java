@@ -62,7 +62,7 @@ public class UserRepository {
         return user;
     }
 
-    public long count(){
+    public Long count(){
         return (Long)entityManager.createQuery("select count(*) from User u").getSingleResult();
     }
 

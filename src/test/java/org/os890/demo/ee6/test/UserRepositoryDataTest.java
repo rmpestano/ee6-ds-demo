@@ -25,16 +25,25 @@ public class UserRepositoryDataTest {
   @Inject
   UserRepositoryData userRepositoryData;
 
+  @Inject
+  UserRepository userRepository;
+
   @Test
   public void shouldInserUser() {
+    long countBefore =  userRepositoryData.count();
+    User u = new User("testUser", "first", "last");
+    userRepository.save(u);
+    assertNotNull(u.getId());
+    assertEquals(userRepository.count(), Long.valueOf(countBefore +1));
+  }
+
+  @Test
+  public void shouldInserUserUsingDeltaspikeData() {
+    long countBefore =  userRepositoryData.count();
     User u = new User("testUser", "first", "last");
     userRepositoryData.save(u);
     assertNotNull(u.getId());
-    assertEquals(userRepositoryData.count(), Long.valueOf(1));
+    assertEquals(userRepositoryData.count(), Long.valueOf(countBefore +1));
   }
-
-
-
-
 
 }

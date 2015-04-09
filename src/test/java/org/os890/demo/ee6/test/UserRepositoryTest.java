@@ -34,7 +34,7 @@ public class UserRepositoryTest {
     User u = new User("testUser","first","last");
     userRepository.save(u);
     assertNotNull(u.getId());
-    assertEquals(userRepository.count(), 1);
+    assertEquals(userRepository.count(), Long.valueOf(1));
   }
 
   @After
