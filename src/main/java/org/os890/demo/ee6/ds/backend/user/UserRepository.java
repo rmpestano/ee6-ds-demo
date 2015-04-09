@@ -75,4 +75,8 @@ public class UserRepository {
 
         entityManager.remove(entityManager.find(User.class,user.getId()));
     }
+
+    public String test(){
+        return "test";
+    }
 }
