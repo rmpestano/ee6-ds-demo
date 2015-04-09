@@ -29,7 +29,7 @@ public class MockTest {
     UserRepository mockedUserRepository = mock(UserRepository.class);
     when(userRepository.test()).thenReturn("mock");
     mockManager.addMock(mockedUserRepository);
-    assertEquals(userRepository.test(), "mock");
+    assertEquals(userRepository.test(), "mock");//is returning "test" instead of "mock"
 
   }
 
