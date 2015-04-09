@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 import javax.inject.Inject;
 
 import org.apache.deltaspike.core.api.projectstage.ProjectStage;
+import org.apache.deltaspike.jpa.api.transaction.Transactional;
 import org.apache.deltaspike.testcontrol.api.TestControl;
 import org.apache.deltaspike.testcontrol.api.junit.CdiTestRunner;
 import org.junit.After;
